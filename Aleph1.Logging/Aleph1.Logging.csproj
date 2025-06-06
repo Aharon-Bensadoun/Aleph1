@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net40;net48</TargetFrameworks>
-		<Version>7.0.2</Version>
-		<AssemblyVersion>7.0.2.0</AssemblyVersion>
-		<FileVersion>7.0.2.0</FileVersion>
+		<Version>7.0.3</Version>
+		<AssemblyVersion>7.0.3.0</AssemblyVersion>
+		<FileVersion>7.0.3.0</FileVersion>
 		<Authors>Avraham Essoudry</Authors>
 		<PackageTags>Aleph1 Logging NLog PostSharp</PackageTags>
 		<PackageIcon>Aleph1.png</PackageIcon>
@@ -18,14 +18,14 @@
 		<Description>Logging aspect using PostSharp</Description>
 		<DebugType>Full</DebugType>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Aleph1.Logging.xml</DocumentationFile>
-		<PackageReleaseNotes>update depts. added A1_Exception for better stacktrace in async scenarios.</PackageReleaseNotes>
+		<PackageReleaseNotes>updated nugets</PackageReleaseNotes>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="NLog" Version="5.2.0" />
-		<PackageReference Include="PostSharp" Version="2023.0.6" />
+		<PackageReference Include="NLog" Version="5.5.0" />
+		<PackageReference Include="PostSharp" Version="2025.1.4" />
 	</ItemGroup>
 
 	<ItemGroup>
