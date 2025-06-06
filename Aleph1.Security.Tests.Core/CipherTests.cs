@@ -1,19 +1,17 @@
 ﻿using System.Security.Cryptography;
 
-using Aleph1.Security.Contracts;
+using Aleph1.Security.Implementation.RijndaelManagedCipher;
 
 using Fastenshtein;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Newtonsoft.Json;
 
 namespace Aleph1.Security.Tests.Core
 {
 	[TestClass]
 	public class CipherTests
 	{
-		private readonly ICipher cipher = new Implementation.RijndaelManagedCipher.RijndaelManagedCipher();
+		private readonly RijndaelManagedCipher cipher = new();
 		private readonly string secret = "My special secret - hello world";
 		private readonly string appPrefix = "{3EE06365-D5E3-4D2E-A8D0-1F6E10138D29}";
 		private readonly string userUniqueID = "127.0.0.0";
@@ -42,7 +40,7 @@ namespace Aleph1.Security.Tests.Core
 			string ticket = cipher.Encrypt(appPrefix, userUniqueID, secret, TimeSpan.FromMilliseconds(15));
 			Thread.Sleep(30);
 
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, ticket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, ticket));
 		}
 
 		[TestMethod]
@@ -50,7 +48,7 @@ namespace Aleph1.Security.Tests.Core
 		{
 			string ticket = cipher.Encrypt(appPrefix, userUniqueID, secret);
 
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, wrongUserUniqueID, ticket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, wrongUserUniqueID, ticket));
 		}
 
 		[TestMethod]
@@ -58,7 +56,7 @@ namespace Aleph1.Security.Tests.Core
 		{
 			string ticket = cipher.Encrypt(appPrefix, userUniqueID, secret);
 
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(wrongAppPrefix, userUniqueID, ticket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(wrongAppPrefix, userUniqueID, ticket));
 		}
 
 		[TestMethod]
@@ -66,12 +64,12 @@ namespace Aleph1.Security.Tests.Core
 		{
 			string ticket = cipher.Encrypt(appPrefix, userUniqueID, secret);
 
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>("", "", ticket));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(null, "", ticket));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>("", null, ticket));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(null, null, ticket));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, ""));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, null));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>("", "", ticket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(null, "", ticket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>("", null, ticket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(null, null, ticket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, ""));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, null));
 		}
 
 		[TestMethod]
@@ -82,22 +80,22 @@ namespace Aleph1.Security.Tests.Core
 			string someChar = ticket[ticket.Length / 2] == 'a' ? "b" : "a";
 			string wrongTicket = ticket.Remove(20, 1).Insert(1, someChar);
 
-			Assert.ThrowsException<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, wrongTicket));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Decrypt<string>(appPrefix, userUniqueID, wrongTicket));
 		}
 
 
 		[TestMethod]
 		public void Encrypt_NullsAndEmptyStrings()
 		{
-			Assert.ThrowsException<CryptographicException>(() => cipher.Encrypt("", "", secret));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Encrypt(null, "", secret));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Encrypt("", null, secret));
-			Assert.ThrowsException<CryptographicException>(() => cipher.Encrypt(null, null, secret));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Encrypt("", "", secret));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Encrypt(null, "", secret));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Encrypt("", null, secret));
+			Assert.ThrowsExactly<CryptographicException>(() => cipher.Encrypt(null, null, secret));
 
 			string emptyStringCipher = cipher.Encrypt(appPrefix, userUniqueID, "");
 			Assert.AreEqual("", cipher.Decrypt<string>(appPrefix, userUniqueID, emptyStringCipher));
 
-			string nullCipher = cipher.Encrypt<string>(appPrefix, userUniqueID, null);
+			string nullCipher = cipher.Encrypt<string>(appPrefix, userUniqueID, null!);
 			Assert.IsNull(cipher.Decrypt<string>(appPrefix, userUniqueID, nullCipher));
 		}
 

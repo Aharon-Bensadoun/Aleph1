@@ -2,9 +2,9 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net48;net8.0</TargetFrameworks>
-		<Version>5.0.1</Version>
-		<AssemblyVersion>5.0.1.0</AssemblyVersion>
-		<FileVersion>5.0.1.0</FileVersion>
+		<Version>5.0.2</Version>
+		<AssemblyVersion>5.0.2.0</AssemblyVersion>
+		<FileVersion>5.0.2.0</FileVersion>
 		<Authors>Avraham Essoudry</Authors>
 		<PackageTags>Aleph1 Security RijndaelManaged</PackageTags>
 		<PackageIcon>Aleph1.png</PackageIcon>
@@ -18,7 +18,7 @@
 		<Description>Aleph1 Security implementation using the RijndaelManaged algorithm</Description>
 		<DebugType>Full</DebugType>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Aleph1.Security.Implementation.RijndaelManaged.xml</DocumentationFile>
-		<PackageReleaseNotes>Throws exceptions when decrypting empty strings or null.</PackageReleaseNotes>
+		<PackageReleaseNotes>updated nugets</PackageReleaseNotes>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 	</PropertyGroup>
 
@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 </Project>

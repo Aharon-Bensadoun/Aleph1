@@ -9,11 +9,12 @@ using Newtonsoft.Json;
 using NLog;
 
 using PostSharp.Aspects;
+using PostSharp.Serialization;
 
 namespace Aleph1.Logging
 {
 	/// <summary>Aspect to handle logging</summary>
-	[Serializable, AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true), LinesOfCodeAvoided(20)]
+	[PSerializable, AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true), LinesOfCodeAvoided(20)]
 	public sealed class LoggedAttribute : OnMethodBoundaryAspect
 	{
 		/// <summary>Default = true, set to False when you don't want the parameters of the function to be logged</summary>
