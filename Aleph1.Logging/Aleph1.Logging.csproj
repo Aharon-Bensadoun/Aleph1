@@ -19,11 +19,14 @@
 		<DebugType>Full</DebugType>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Aleph1.Logging.xml</DocumentationFile>
 		<PackageReleaseNotes>updated nugets</PackageReleaseNotes>
+		<PackageReleaseNotes>updated nugets</PackageReleaseNotes>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="NLog" Version="5.5.0" />
+		<PackageReference Include="PostSharp" Version="2025.1.4" />
 		<PackageReference Include="NLog" Version="5.5.0" />
 		<PackageReference Include="PostSharp" Version="2025.1.4" />
 	</ItemGroup>
